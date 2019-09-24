@@ -1,4 +1,4 @@
-
+require_relative '../../app/api'
 require 'rack/test'
 require 'sinatra/base'
 require 'json'
@@ -6,10 +6,6 @@ require 'json'
 module ExpenseTracker
   RSpec.describe 'Expense Tracker API' do
     include Rack::Test::Methods
-
-    class API
-
-    end
 
     def app
       ExpenseTracker::API.new
@@ -22,7 +18,11 @@ module ExpenseTracker
         date: '2017-06-19'
         }
 
-        post 'expenses', JSON.generate(coffee)
+      post 'expenses', JSON.generate(coffee)
+      expect(last_response.status).to eq 200
+
+      parsed = JSON.parse(last_response.body)
+      expect(parsed).to include("expense_id" => a_kind_of(Integer))
     end
 
 
