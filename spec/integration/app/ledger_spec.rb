@@ -49,5 +49,31 @@ module ExpenseTracker
         end
       end
     end
+
+    describe "#expenses_on" do
+      it 'returns all expenses for a given date' do
+
+        DB[:expenses].insert({
+          "payee" => 'Starbucks',
+          "amount" => 5.75,
+          "date" => '21-12-2011'
+        })
+
+        DB[:expenses].insert({
+          "payee" => 'Roche',
+          "amount" => 5000.75,
+          "date" => '12-10-2010'
+        })
+
+        DB[:expenses].insert({
+          "payee" => 'AOC',
+          "amount" => 5.75,
+          "date" => '21-12-2011'
+        })
+
+        result = ledger.expenses_on('21-12-2011')
+        expect(result.size).to eq 2
+      end
+    end
   end
 end
