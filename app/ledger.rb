@@ -5,7 +5,7 @@ module ExpenseTracker
     def record(expense)
     end
 
-    def query(date)
+    def expenses_on(date)
     end
   end
 end

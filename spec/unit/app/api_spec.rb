@@ -63,7 +63,7 @@ module ExpenseTracker
         let(:date) { "2014-03-11" }
 
         before do
-          allow(ledger).to receive(:query)
+          allow(ledger).to receive(:expenses_on)
             .with(date).and_return([{expense_id: 123,
                                    payee: "Starbucks",
                                    amount: 12.23}])
@@ -83,7 +83,7 @@ module ExpenseTracker
         let(:date) { "2014-03-11" }
 
         before do
-          allow(ledger).to receive(:query)
+          allow(ledger).to receive(:expenses_on)
             .with(date).and_return([])
         end
 
